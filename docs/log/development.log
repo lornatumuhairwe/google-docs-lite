@@ -1,0 +1,524 @@
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateNotes (20180320191835)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "notes" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "text" text, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20180320191835"]]
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2018-03-20 19:19:05.294067"], ["updated_at", "2018-03-20 19:19:05.294067"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.3ms)[0m  [1m[32mINSERT INTO "notes" ("text", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["text", "Hello!"], ["created_at", "2018-03-20 19:22:06.682289"], ["updated_at", "2018-03-20 19:22:06.682289"]]
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/notes/1" for ::1 at 2018-03-20 22:43:54 +0300
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.4ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 12ms (Views: 1.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/cable" for ::1 at 2018-03-21 04:05:01 +0300
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:05:01 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+Started GET "/cable" for ::1 at 2018-03-21 04:06:03 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:06:03 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Started GET "/notes/1" for ::1 at 2018-03-21 04:06:03 +0300
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.6ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 33ms (Views: 0.7ms | ActiveRecord: 1.8ms)
+
+
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+Finished "/cable/" [WebSocket] for ::1 at 2018-03-21 04:06:15 +0300
+NotesChannel stopped streaming from notes
+Started GET "/cable" for ::1 at 2018-03-21 04:06:15 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:06:15 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Started GET "/notes/1" for ::1 at 2018-03-21 04:06:15 +0300
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.1ms)
+
+
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+Finished "/cable/" [WebSocket] for ::1 at 2018-03-21 04:06:21 +0300
+NotesChannel stopped streaming from notes
+Started GET "/cable" for ::1 at 2018-03-21 04:06:21 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:06:21 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Started GET "/notes/1" for ::1 at 2018-03-21 04:06:21 +0300
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.1ms)
+
+
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+Finished "/cable/" [WebSocket] for ::1 at 2018-03-21 04:06:22 +0300
+NotesChannel stopped streaming from notes
+Started GET "/cable" for ::1 at 2018-03-21 04:06:22 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:06:22 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Started GET "/notes/1" for ::1 at 2018-03-21 04:06:22 +0300
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.1ms)
+
+
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+NotesChannel#receive({"text"=>"Hello! ", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! \",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1e9fa30>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! h", "id"=>1})
+NotesChannel#receive({"text"=>"Hello! ho", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! h\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1e9fa30>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! how", "id"=>1})
+NotesChannel#receive({"text"=>"Hello! how ", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! ho\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1e9fa30>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! how a", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how \",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1e9fa30>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! how ar", "id"=>1})
+NotesChannel#receive({"text"=>"Hello! how are", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1e9fa30>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how a\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1e9fa30>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! how are ", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how ar\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1e9fa30>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! how are y", "id"=>1})
+NotesChannel#receive({"text"=>"Hello! how are yo", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how are \",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1e9fa30>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how are\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1e9fa30>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how are yo\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1e9fa30>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! how are you", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how are y\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1e9fa30>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how are you\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1e9fa30>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! how are you?", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how are you?\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1e9fa30>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! how are you? ", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how are you? \",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1e9fa30>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Finished "/cable/" [WebSocket] for ::1 at 2018-03-21 04:06:56 +0300
+NotesChannel stopped streaming from notes
+Finished "/cable/" [WebSocket] for ::1 at 2018-03-21 04:06:56 +0300
+NotesChannel stopped streaming from notes
+Started GET "/notes/1" for ::1 at 2018-03-21 04:06:56 +0300
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/notes/1" for ::1 at 2018-03-21 04:06:56 +0300
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/cable" for ::1 at 2018-03-21 04:06:56 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:06:56 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Started GET "/cable" for ::1 at 2018-03-21 04:06:56 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:06:56 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+Finished "/cable/" [WebSocket] for ::1 at 2018-03-21 04:07:00 +0300
+NotesChannel stopped streaming from notes
+Started GET "/notes/1" for ::1 at 2018-03-21 04:07:00 +0300
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/cable" for ::1 at 2018-03-21 04:07:00 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:07:00 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+Finished "/cable/" [WebSocket] for ::1 at 2018-03-21 04:07:02 +0300
+NotesChannel stopped streaming from notes
+Started GET "/notes/1" for ::1 at 2018-03-21 04:07:02 +0300
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/cable" for ::1 at 2018-03-21 04:07:02 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:07:02 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+NotesChannel#receive({"text"=>"Hello! ", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! \",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f2141680>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! h", "id"=>1})
+NotesChannel#receive({"text"=>"Hello! ho", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! h\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f2141680>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! how", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f2141680>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! ho\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f2141680>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! how ", "id"=>1})
+NotesChannel#receive({"text"=>"Hello! how a", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how \",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f2141680>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how a\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f2141680>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! how ar", "id"=>1})
+NotesChannel#receive({"text"=>"Hello! how are", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how ar\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f2141680>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! how are ", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how are\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f2141680>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! how are \",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f2141680>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Finished "/cable/" [WebSocket] for ::1 at 2018-03-21 04:08:25 +0300
+NotesChannel stopped streaming from notes
+Finished "/cable/" [WebSocket] for ::1 at 2018-03-21 04:08:25 +0300
+NotesChannel stopped streaming from notes
+Started GET "/notes/1" for ::1 at 2018-03-21 04:08:25 +0300
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/cable" for ::1 at 2018-03-21 04:08:25 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:08:25 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Started GET "/notes/1" for ::1 at 2018-03-21 04:08:25 +0300
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/cable" for ::1 at 2018-03-21 04:08:25 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:08:25 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+NotesChannel#receive({"text"=>"Hello!d", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!d\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1de09c8>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!dd", "id"=>1})
+NotesChannel#receive({"text"=>"Hello!ddd", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!dd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1de09c8>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!ddd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1de09c8>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!d", "id"=>1})
+NotesChannel#receive({"text"=>"Hello!dddd", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!d\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1de9c58>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!ddddd", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!dddd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1de09c8>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!ddddd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1de09c8>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!dddddd", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!dddddd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1de09c8>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!ddddddd", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!ddddddd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1de09c8>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!dd", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!dd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1de9c58>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!ddd", "id"=>1})
+NotesChannel#receive({"text"=>"Hello!dddd", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!ddd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1de9c58>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!dddd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1de9c58>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!ddddd", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!ddddd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1de9c58>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!dddddd", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!dddddd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f1de9c58>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Finished "/cable/" [WebSocket] for ::1 at 2018-03-21 04:10:17 +0300
+NotesChannel stopped streaming from notes
+Started GET "/notes/1" for ::1 at 2018-03-21 04:10:18 +0300
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/cable" for ::1 at 2018-03-21 04:10:18 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:10:18 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+Finished "/cable/" [WebSocket] for ::1 at 2018-03-21 04:10:19 +0300
+NotesChannel stopped streaming from notes
+Started GET "/notes/1" for ::1 at 2018-03-21 04:10:19 +0300
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/cable" for ::1 at 2018-03-21 04:10:19 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:10:19 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+NotesChannel#receive({"text"=>"Hello!f", "id"=>1})
+NotesChannel#receive({"text"=>"Hello!ff", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!f\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f4080730>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!ff\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f4080730>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!fff", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!fff\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f4080730>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!ffff", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!ffff\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f4080730>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!fffff", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!fffff\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f4080730>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!d", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!d\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f403ab18>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!dd", "id"=>1})
+NotesChannel#receive({"text"=>"Hello!ddd", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!dd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f403ab18>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!ddd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f403ab18>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!dddd", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!dddd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f403ab18>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello!ddddd", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello!ddddd\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007fb0f403ab18>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Started GET "/cable" for ::1 at 2018-03-21 04:12:21 +0300
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:12:21 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+Started GET "/cable" for ::1 at 2018-03-21 04:12:22 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:12:22 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+Finished "/cable/" [WebSocket] for ::1 at 2018-03-21 04:12:27 +0300
+NotesChannel stopped streaming from notes
+Started GET "/notes/1" for ::1 at 2018-03-21 04:12:28 +0300
+Processing by NotesController#show as */*
+Started GET "/cable" for ::1 at 2018-03-21 04:12:28 +0300
+  Parameters: {"id"=>"1"}
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:12:28 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mNote Load (0.6ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 29ms (Views: 1.3ms | ActiveRecord: 1.4ms)
+
+
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+Finished "/cable/" [WebSocket] for ::1 at 2018-03-21 04:12:30 +0300
+NotesChannel stopped streaming from notes
+Started GET "/notes/1" for ::1 at 2018-03-21 04:12:30 +0300
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/cable" for ::1 at 2018-03-21 04:12:30 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:12:30 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+NotesChannel#receive({"text"=>"Hello! ", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! \",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! t", "id"=>1})
+NotesChannel#receive({"text"=>"Hello! to", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! t\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! tod", "id"=>1})
+NotesChannel#receive({"text"=>"Hello! toda", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! toda\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! todat", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! to\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! todat\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! todaty", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! tod\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! todaty ", "id"=>1})
+NotesChannel#receive({"text"=>"Hello! todaty i", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! todaty\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! todaty is", "id"=>1})
+NotesChannel#receive({"text"=>"Hello! todaty is ", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! todaty \",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! todaty is\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! todaty is t", "id"=>1})
+NotesChannel#receive({"text"=>"Hello! todaty is th", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! todaty i\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! todaty is the", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! todaty is th\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! todaty is the ", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! todaty is t\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! todaty is the d", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! todaty is \",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! todaty is the da", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! todaty is the\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+NotesChannel#receive({"text"=>"Hello! todaty is the day", "id"=>1})
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! todaty is the da\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! todaty is the \",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! todaty is the d\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Could not execute command from ({"command"=>"message", "identifier"=>"{\"channel\":\"NotesChannel\"}", "data"=>"{\"text\":\"Hello! todaty is the day\",\"id\":1}"}) [NameError - undefined local variable or method `data' for #<NotesChannel:0x00007f9ca3b86518>]: /Users/lornatumuhairwe/RailsPractice/documentRealTime/docs/app/channels/notes_channel.rb:11:in `receive' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `public_send' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:264:in `dispatch_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/actioncable-5.1.5/lib/action_cable/channel/base.rb:166:in `block in perform_action' | /Users/lornatumuhairwe/.rvm/gems/ruby-2.5.0@rails5.2/gems/activesupport-5.1.5/lib/active_support/notifications.rb:168:in `instrument'
+Started GET "/cable" for ::1 at 2018-03-21 04:18:03 +0300
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:18:03 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+Finished "/cable/" [WebSocket] for ::1 at 2018-03-21 04:18:05 +0300
+NotesChannel stopped streaming from notes
+Started GET "/cable" for ::1 at 2018-03-21 04:18:06 +0300
+Started GET "/notes/1" for ::1 at 2018-03-21 04:18:06 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:18:06 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 36ms (Views: 1.1ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/notes/1" for ::1 at 2018-03-21 04:18:06 +0300
+Processing by NotesController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/cable" for ::1 at 2018-03-21 04:18:06 +0300
+Started GET "/cable/" [WebSocket] for ::1 at 2018-03-21 04:18:06 +0300
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: Upgrade, HTTP_UPGRADE: websocket)
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+NotesChannel is transmitting the subscription confirmation
+NotesChannel is streaming from notes
+NotesChannel#receive({"text"=>"Hello! ", "id"=>1})
+  [1m[36mNote Load (0.1ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (9.6ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! "], ["updated_at", "2018-03-21 01:18:08.575726"], ["id", 1]]
+  [1m[35m (2.3ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! ", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! ", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! ", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! t", "id"=>1})
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! t"], ["updated_at", "2018-03-21 01:18:09.766371"], ["id", 1]]
+  [1m[35m (3.1ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! t", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! t", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! t", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! to", "id"=>1})
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! to"], ["updated_at", "2018-03-21 01:18:09.957113"], ["id", 1]]
+  [1m[35m (2.3ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! to", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! to", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! to", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! toa", "id"=>1})
+  [1m[36mNote Load (0.3ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! toa"], ["updated_at", "2018-03-21 01:18:10.305944"], ["id", 1]]
+  [1m[35m (2.7ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! toa", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! toa", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! toa", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! toay", "id"=>1})
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! toay"], ["updated_at", "2018-03-21 01:18:10.887378"], ["id", 1]]
+  [1m[35m (2.6ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! toay", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! toay", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! toay", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! toay ", "id"=>1})
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! toay "], ["updated_at", "2018-03-21 01:18:11.146131"], ["id", 1]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! toay ", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! toay ", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! toay ", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! toay i", "id"=>1})
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! toay i"], ["updated_at", "2018-03-21 01:18:11.388606"], ["id", 1]]
+  [1m[35m (2.8ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! toay i", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! toay i", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! toay i", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! toay is", "id"=>1})
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! toay is"], ["updated_at", "2018-03-21 01:18:11.540851"], ["id", 1]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! toay is", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! toay is", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! toay is", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! toay is ", "id"=>1})
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! toay is "], ["updated_at", "2018-03-21 01:18:11.712570"], ["id", 1]]
+  [1m[35m (2.5ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! toay is ", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! toay is ", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! toay is ", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! toay is t", "id"=>1})
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! toay is t"], ["updated_at", "2018-03-21 01:18:12.702877"], ["id", 1]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! toay is t", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! toay is t", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! toay is t", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! toay is to", "id"=>1})
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! toay is to"], ["updated_at", "2018-03-21 01:18:12.835180"], ["id", 1]]
+  [1m[35m (2.2ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! toay is to", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! toay is to", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! toay is to", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! toay is tom", "id"=>1})
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! toay is tom"], ["updated_at", "2018-03-21 01:18:13.397043"], ["id", 1]]
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! toay is tom", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! toay is tom", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! toay is tom", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! toay is tomo", "id"=>1})
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! toay is tomo"], ["updated_at", "2018-03-21 01:18:13.637245"], ["id", 1]]
+  [1m[35m (2.2ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! toay is tomo", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! toay is tomo", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! toay is tomo", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! toay is tomow", "id"=>1})
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! toay is tomow"], ["updated_at", "2018-03-21 01:18:14.230273"], ["id", 1]]
+  [1m[35m (2.5ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! toay is tomow", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! toay is tomow", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! toay is tomow", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! toay is tomoww", "id"=>1})
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! toay is tomoww"], ["updated_at", "2018-03-21 01:18:14.437525"], ["id", 1]]
+  [1m[35m (2.4ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! toay is tomoww", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! toay is tomoww", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! toay is tomoww", "id"=>1} (via streamed from notes)
+NotesChannel#receive({"text"=>"Hello! toay is tomowwo", "id"=>1})
+  [1m[36mNote Load (0.2ms)[0m  [1m[34mSELECT  "notes".* FROM "notes" WHERE "notes"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "notes" SET "text" = ?, "updated_at" = ? WHERE "notes"."id" = ?[0m  [["text", "Hello! toay is tomowwo"], ["updated_at", "2018-03-21 01:18:14.857638"], ["id", 1]]
+  [1m[35m (2.6ms)[0m  [1m[36mcommit transaction[0m
+[ActionCable] Broadcasting to notes: {"text"=>"Hello! toay is tomowwo", "id"=>1}
+NotesChannel transmitting {"text"=>"Hello! toay is tomowwo", "id"=>1} (via streamed from notes)
+NotesChannel transmitting {"text"=>"Hello! toay is tomowwo", "id"=>1} (via streamed from notes)
