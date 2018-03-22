@@ -1,24 +1,20 @@
-# README
+# Google Docs Lite
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple document app that updates the document in real time when someone is typing.
 
-Things you may want to cover:
+# Installation
 
-* Ruby version
+This assumes you have ruby installed on your system
 
-* System dependencies
+* Clone the repo
 
-* Configuration
+* cd into the docs-frontend directory. Run the front-end using:
 
-* Database creation
+        yarn start
+      
 
-* Database initialization
+* cd into the docs backend. Run the backend/API with 
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+        rails s -p 3001
+        
+* Run `localhost:3000` in your browser. Open another browser window and load `localhost:3000` in it. Put them side by side and start editing the note. :D
